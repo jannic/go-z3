@@ -9,6 +9,7 @@
 #define _GOZ3_H_INCLUDED
 
 #include <z3.h>
+//#include <stdbool.h>
 
 //-------------------------------------------------------------------
 // Error handling helpers
