@@ -16,7 +16,7 @@ import "C"
 // Freeing the context (Context.Close) will NOT automatically close associated
 // optimizers. They must be managed separately.
 type Optimize struct {
-	rawCtx    C.Z3_context
+	rawCtx      C.Z3_context
 	rawOptimize C.Z3_optimize
 }
 
@@ -27,7 +27,7 @@ func (c *Context) NewOptimize() *Optimize {
 
 	return &Optimize{
 		rawOptimize: rawOptimize,
-		rawCtx:    c.raw,
+		rawCtx:      c.raw,
 	}
 }
 
@@ -71,4 +71,9 @@ func (s *Optimize) Model() *Model {
 	}
 	m.IncRef()
 	return m
+}
+
+//  Add a maximization constraint.
+func (s *Optimize) Maximize(a *AST) {
+	C.Z3_optimize_maximize(s.rawCtx, s.rawOptimize, a.rawAST)
 }
