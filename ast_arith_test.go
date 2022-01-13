@@ -67,6 +67,25 @@ func TestASTSub(t *testing.T) {
 	}
 }
 
+func TestASTDiv(t *testing.T) {
+	config := NewConfig()
+	defer config.Close()
+	ctx := NewContext(config)
+	defer ctx.Close()
+
+	// Create an int
+	x := ctx.Const(ctx.Symbol("x"), ctx.IntSort())
+	y := ctx.Const(ctx.Symbol("y"), ctx.IntSort())
+
+	// Div
+	raw := x.Div(y)
+
+	actual := raw.String()
+	if actual != "(div x y)" {
+		t.Fatalf("bad:\n%s", actual)
+	}
+}
+
 func TestASTLt(t *testing.T) {
 	config := NewConfig()
 	defer config.Close()

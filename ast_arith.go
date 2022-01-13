@@ -26,6 +26,16 @@ func (a *AST) Add(args ...*AST) *AST {
 	}
 }
 
+// Div creates an AST node representing division.
+//
+// All AST values must be part of the same context.
+func (a *AST) Div(a2 *AST) *AST {
+	return &AST{
+		rawCtx: a.rawCtx,
+		rawAST: C.Z3_mk_div(a.rawCtx, a.rawAST, a2.rawAST),
+	}
+}
+
 // Mul creates an AST node representing multiplication.
 //
 // All AST values must be part of the same context.
